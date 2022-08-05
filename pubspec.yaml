@@ -1,6 +1,6 @@
 name: logger_service
 description: A log service that wraps an implementation to provide a common interface
-version: 1.0.0
+version: 1.0.1
 publish_to: none
 
 environment:
