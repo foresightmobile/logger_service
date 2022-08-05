@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e # exit on first error
+
+./ci_script.sh

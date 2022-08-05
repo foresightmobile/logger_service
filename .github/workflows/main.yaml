@@ -1,0 +1,19 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches:
+      # should not be possible to push to dev/master once branch permissions are set
+      - dev
+      - master 
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter --version
+      - run: ./ci_script.sh
+        shell: bash       
