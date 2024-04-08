@@ -26,11 +26,13 @@ void main() {
 void _exampleInvocationsThatShouldNotFail() {
   // log with message only
   Log().v('this is a verbose log');
+  Log().t('this is a trace log');
   Log().d('this is a debug log');
   Log().i('this is an info log');
   Log().w('this is a warning log');
   Log().e('this is an error log');
   Log().wtf('this is a wtf log');
+  Log().f('this is a fatal log');
 
   // log a real error
   try {

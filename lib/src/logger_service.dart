@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-import 'package:logger_service/src/custom_pretty_printer.dart';
 
 /// Class that wraps https://pub.dev/packages/logger for a common
 /// interface should we decide to change implementations in future
@@ -39,17 +38,20 @@ class Log {
   ];
 
   /// Default printer - uses [SimplePrinter] if null
-  static LogPrinter? printer = CustomPrettyPrinter(
+  static LogPrinter? printer = PrettyPrinter(
     colors: _isColorEnabled,
     methodCount: 3,
-    stacktraceFilters: stacktraceFilters,
   );
 
   /// Log a message at level [Level.verbose].
+  @Deprecated('[verbose] is being deprecated in favor of [trace].')
   void v(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    Logger.level = Level.warning;
-
     _log(Level.verbose, message, error, stackTrace);
+  }
+
+  /// Log a message at level [Level.trace].
+  void t(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _log(Level.trace, message, error, stackTrace);
   }
 
   /// Log a message at level [Level.debug].
@@ -73,8 +75,14 @@ class Log {
   }
 
   /// Log a message at level [Level.wtf].
+  @Deprecated('[wtf] is being deprecated in favor of [fatal].')
   void wtf(dynamic message, [dynamic error, StackTrace? stackTrace]) {
     _log(Level.wtf, message, error, stackTrace);
+  }
+
+  /// Log a message at level [Level.fatal].
+  void f(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _log(Level.fatal, message, error, stackTrace);
   }
 
   void _log(
@@ -86,9 +94,16 @@ class Log {
     if (enabled) {
       // see https://github.com/leisim/logger/issues/98
       // ignore: parameter_assignments
-      if (stackTrace != null) error = '$error\n${stackTrace.toString()}';
+      if (stackTrace != null) error = '$error\n$stackTrace';
 
-      _logger?.log(level, '$tag: $message', error, stackTrace);
+      _logger?.log(
+        level,
+        '$tag: $message',
+        error: error,
+        stackTrace: stackTrace,
+        // error,
+        // stackTrace,
+      );
     }
   }
 }

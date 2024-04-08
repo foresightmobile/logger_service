@@ -1,7 +1,7 @@
 
 # logger_service
 
-[![ci](https://github.com/foresightmobile/logger_service/actions/workflows/main.yaml/badge.svg)](https://github.com/foresightmobile/logger_service/actions/workflows/main.yaml)
+[![ci](https://github.com/xni06/logger_service/actions/workflows/main.yaml/badge.svg)](https://github.com/foresightmobile/logger_service/actions/workflows/main.yaml)
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 
 A log service that wraps an implementation to provide a common interface
@@ -16,8 +16,5 @@ To help reduce broken CI builds, please run the following command from from your
 git config --local core.hooksPath hooks
 ```
 
-
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
