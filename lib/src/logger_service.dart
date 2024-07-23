@@ -45,6 +45,9 @@ class Log {
     stacktraceFilters: stacktraceFilters,
   );
 
+  /// Callback for handling errors
+  static void Function(dynamic, dynamic, StackTrace?)? onError;
+
   /// Log a message at level [Level.verbose].
   void v(dynamic message, [dynamic error, StackTrace? stackTrace]) {
     Logger.level = Level.warning;
@@ -69,6 +72,7 @@ class Log {
 
   /// Log a message at level [Level.error].
   void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    onError?.call(message, error, stackTrace);
     _log(Level.error, message, error, stackTrace);
   }
 
